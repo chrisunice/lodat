@@ -10,7 +10,7 @@ const useStyles = makeStyles({
   menuContainer: {
     display: 'flex',
     alignItems: 'top',
-    border: '2px solid blue',
+    border: '2px solid blue' // note debugging only
   },
   menuButton: {},
   menuTitle: {}

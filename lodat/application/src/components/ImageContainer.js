@@ -20,15 +20,15 @@ const ImageContainer = (props) => {
       <div className={classes.imageContainer}>
         <img src={props.source} alt=""/>
       </div>
-  )
+  );
 }
 
 ImageContainer.defaultProps = {
   source: ''
-}
+};
 
 Image.propTypes = {
   title: PropTypes.string
-}
+};
 
-export default ImageContainer
+export default ImageContainer;
