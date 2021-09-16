@@ -9,12 +9,11 @@ const useStyles = makeStyles({
     alignItems: 'center',
     height: 'auto',
     padding: 50,
-    border: '2px solid red' // note debugging only
   },
   image: {}
 });
 
-const ImageContainer = (props) => {
+const Image = (props) => {
   const classes = useStyles();
   return (
       <div className={classes.imageContainer}>
@@ -23,7 +22,7 @@ const ImageContainer = (props) => {
   );
 }
 
-ImageContainer.defaultProps = {
+Image.defaultProps = {
   source: ''
 };
 
@@ -31,4 +30,4 @@ Image.propTypes = {
   title: PropTypes.string
 };
 
-export default ImageContainer;
+export default Image;

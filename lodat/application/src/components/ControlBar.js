@@ -1,38 +1,38 @@
 import React from 'react';
 import { makeStyles } from "@material-ui/core/styles";
-import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
-import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-
+import { FaArrowAltCircleLeft, FaArrowAltCircleRight } from "react-icons/fa";
 
 
 const useStyles = makeStyles({
     controlContainer: {
         display: 'flex',
         justifyContent: 'center',
-        border: '2px solid green' // note debugging only
     },
     arrowContainer: {
         display: 'flex',
         justifyContent: 'space-evenly',
-        width: '20vw',
-        border: '2px solid yellow'
+        width: 200,
+        borderRadius: 10,
+        boxShadow: "-1px -1px 10px 8px darkgrey",
+        backgroundColor: "white",
+        padding: "10px 25px 10px 25px",
     },
     arrow: {
         fontSize: 'xxx-large',
-        color: "white"
+        color: "black"
     }
 });
 
-const ControlContainer = () => {
+const ControlBar = () => {
     const classes = useStyles();
     return (
         <div className={classes.controlContainer}>
             <div className={classes.arrowContainer}>
-                <ArrowBackIcon className={classes.arrow} />
-                <ArrowForwardIcon className={classes.arrow} />
+                <FaArrowAltCircleLeft className={classes.arrow} />
+                <FaArrowAltCircleRight className={classes.arrow} />
             </div>
         </div>
     );
 }
 
-export default ControlContainer;
+export default ControlBar;
