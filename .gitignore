@@ -1,5 +1,4 @@
 /.idea
 /venv
-/archive
 lodat/application/node_modules
 lodat/application/.DS_Store
