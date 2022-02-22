@@ -1,4 +1,4 @@
 /.idea
 /venv
-lodat/application/node_modules
-lodat/application/.DS_Store
+/archive/application/.DS_Store/
+/archive/application/node_modules/
