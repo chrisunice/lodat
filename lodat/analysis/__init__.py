@@ -60,16 +60,23 @@ class Algo(Configuration):
                 test_interval = (test_gmn - test_u, test_gmn + test_u)
                 base_interval = (base_gmn - base_u, base_gmn + base_u)
 
+                # Statistically significant differences
+                growth = min(test_interval) - max(base_interval)
+
                 # Store the data
-                s = pd.Series(data=dict(
-                    Look=look,
-                    Depression=depr,
-                    TestMean=test_gmn,
-                    TestInterval=test_interval,
-                    TestCount=len(test_rcs),
-                    BaseMean=base_gmn,
-                    BaseInterval=base_interval,
-                    BaseCount=len(base_rcs)))
+                s = pd.Series(
+                    data=dict(
+                        Look=look,
+                        Depression=depr,
+                        TestMean=test_gmn,
+                        TestInterval=test_interval,
+                        TestCount=len(test_rcs),
+                        BaseMean=base_gmn,
+                        BaseInterval=base_interval,
+                        BaseCount=len(base_rcs),
+                        Growth=growth
+                    )
+                )
                 df = df.append(s, ignore_index=True)
         df.set_index(['Depression', 'Look'], inplace=True, drop=True)
         return df
