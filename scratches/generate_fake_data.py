@@ -35,9 +35,9 @@ if __name__ == '__main__':
                 rcs = np.random.normal(rcs_base, 5, len(look))
 
                 # Add random growth
-                num_growths = 100
+                num_growths = 1000
                 rand_idx = random.sample(range(len(rcs)), num_growths)
-                growths = np.random.randint(1, 12+1, size=(num_growths,))
+                growths = np.random.randint(0, 100, size=(num_growths,))
                 rcs[rand_idx] = rcs[rand_idx] + growths
 
                 data = data.append(
