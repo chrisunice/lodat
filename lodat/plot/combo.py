@@ -88,7 +88,7 @@ class ComboPlot:
                 fillcolor=self.baseline_color,
                 opacity=0.2,
                 hoverinfo='skip',
-                name='Test Uncertainty'
+                name='Baseline Uncertainty'
             )
         ]
         fig.add_traces(base_traces, rows=1, cols=1)
