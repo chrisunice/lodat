@@ -9,7 +9,7 @@ from pandas.core.indexes.multi import MultiIndex
 class ComboPlot:
 
     column_names = ['TestMean', 'TestInterval', 'BaseMean', 'BaseInterval', 'Growth']
-    test_color = 'red'
+    test_color = 'black'
     baseline_color = 'blue'
 
     def __init__(self, df: pd.DataFrame, title: str = None):
@@ -39,6 +39,7 @@ class ComboPlot:
         fig.update_xaxes(title_text='Look (deg)', range=[0, 360], dtick=30, row=2, col=1)
 
         # X-Y plot
+        # test data
         test_traces = [
             go.Scatter(
                 x=self.df.index,
@@ -57,6 +58,7 @@ class ComboPlot:
                     self.df.TestInterval.apply(lambda x: x[0]),
                     self.df.TestInterval.apply(lambda x: x[1])[::-1]
                 )),
+                mode='none',
                 fill='toself',
                 fillcolor=self.test_color,
                 opacity=0.2,
@@ -66,6 +68,7 @@ class ComboPlot:
         ]
         fig.add_traces(test_traces, rows=1, cols=1)
 
+        # baseline data
         base_traces = [
             go.Scatter(
                 x=self.df.index,
@@ -84,6 +87,7 @@ class ComboPlot:
                     self.df.BaseInterval.apply(lambda x: x[0]),
                     self.df.BaseInterval.apply(lambda x: x[1])[::-1]
                 )),
+                mode='none',
                 fill='toself',
                 fillcolor=self.baseline_color,
                 opacity=0.2,
