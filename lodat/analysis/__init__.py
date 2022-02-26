@@ -23,7 +23,6 @@ class Algo(Configuration):
 
         # Step through each look
         df = pd.DataFrame()
-        dct = dict()
         for depr in depr_centers:
             for look in look_centers:
                 # Get hit data
