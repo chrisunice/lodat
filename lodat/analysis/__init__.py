@@ -60,7 +60,16 @@ class Algo(Configuration):
                 base_interval = (base_gmn - base_u, base_gmn + base_u)
 
                 # Statistically significant differences
-                growth = min(test_interval) - max(base_interval)
+                # Case 1: growth
+                if min(test_interval) > max(base_interval):
+                    delta = min(test_interval) - max(base_interval)
+                # Case 2: improvement
+                elif min(base_interval) > max(test_interval):
+                    delta = min(base_interval) - max(test_interval)
+                    delta = -1 * delta
+                # Case 3: inconclusive
+                else:
+                    delta = np.nan
 
                 # Store the data
                 s = pd.Series(
@@ -73,7 +82,7 @@ class Algo(Configuration):
                         BaseMean=base_gmn,
                         BaseInterval=base_interval,
                         BaseCount=len(base_rcs),
-                        Growth=growth
+                        Delta=delta
                     )
                 )
                 df = df.append(s, ignore_index=True)
