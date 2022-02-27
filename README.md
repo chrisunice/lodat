@@ -40,5 +40,7 @@ cp.render()         # will display in default browser
 ```
 <h5 align="center">All data</h5>
 ![](reference/images/entire_plot.png)
-<h5 align="center">Subset of data</h5>
-![](reference/images/zoomed_plot.png)
+
+[comment]: <> (<h5 align="center">Subset of data</h5>)
+
+[comment]: <> (![]&#40;reference/images/zoomed_plot.png&#41;)
