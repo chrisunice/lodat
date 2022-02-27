@@ -2,13 +2,14 @@ import numpy as np
 import pandas as pd
 import plotly.io as pio
 import plotly.graph_objects as go
+from lodat.utils import detection_range
 from plotly.subplots import make_subplots
 from pandas.core.indexes.multi import MultiIndex
 
 
 class ComboPlot:
 
-    column_names = ['TestMean', 'TestInterval', 'BaseMean', 'BaseInterval', 'Growth']
+    column_names = ['TestMean', 'TestInterval', 'BaseMean', 'BaseInterval', 'Delta']
     test_color = 'black'
     baseline_color = 'blue'
 
@@ -32,10 +33,17 @@ class ComboPlot:
 
     def render(self):
         if self.title is not None:
-            _titles = (f"{self.title} RCS Measurement", f"{self.title} RCS Growth")
+            _titles = (f"{self.title} RCS Measurement", f"{self.title} RCS Differences")
         else:
             _titles = self.title
-        fig = make_subplots(rows=2, cols=1, shared_xaxes=True, subplot_titles=_titles)
+        fig = make_subplots(
+            rows=2,
+            cols=1,
+            shared_xaxes=True,
+            subplot_titles=_titles,
+            specs=[[{"secondary_y": False}],
+                   [{"secondary_y": True}]]
+        )
         fig.update_xaxes(title_text='Look (deg)', range=[0, 360], dtick=30, row=2, col=1)
 
         # X-Y plot
@@ -99,13 +107,33 @@ class ComboPlot:
         fig.update_yaxes(title_text='RCS (dBsm)', row=1, col=1)
 
         # Bar plot
-        growth_trace = go.Bar(
+        # deltas
+        delta_trace = go.Bar(
             x=self.df.index,
-            y=self.df.Growth,
-            name='Growth'
+            y=self.df.Delta,
+            name='Differences',
+            marker=dict(color=['red' if delta >= 0 else 'green' for delta in self.df.Delta])
         )
-        fig.add_trace(growth_trace, row=2, col=1)
-        fig.update_yaxes(title_text='Delta (dB)', range=[-15, 12], dtick=3, row=2, col=1)
+        fig.add_trace(delta_trace, row=2, col=1, secondary_y=False)
+        fig.update_yaxes(title_text='Delta (dB)', range=[-12, 12], dtick=3, row=2, col=1, secondary_y=False)
+        # TODO add second y-axis
+        # # percent change in detection range
+        # dr_trace = go.Bar(
+        #     x=self.df.index,
+        #     y=self.df.Delta,
+        #     hoverinfo='none',
+        #     visible=False,
+        # )
+        # fig.add_trace(dr_trace, row=2, col=1, secondary_y=True)
+        # fig.update_yaxes(
+        #     title_text='Detection Range (%)',
+        #     secondary_y=True,
+        #     showgrid=False,
+        #     range=[-50, 100],
+        #     dtick=10,
+        #     row=2,
+        #     col=1,
+        # )
 
         fig.show()
         return True
