@@ -31,11 +31,14 @@ algo = Algo(test, base)
 result = algo.analyze(freq, pol, bootstrap=False)       # multi-index pandas.DataFrame
 ```
 
-Results can be viewed with `ComboPlot` f
+Results can be viewed with `ComboPlot` 
 ```python 
 from lodat.plot import ComboPlot
 d = 10              # depression of interest
 cp = ComboPlot(result.loc[d], title='My Data')
 cp.render()         # will display in default browser
 ```
-<img alt="" src="scratches/images/newplot.png" width="100">
+<h5 align="center">All data</h5>
+![](reference/images/entire_plot.png)
+<h5 align="center">Subset of data</h5>
+![](reference/images/zoomed_plot.png)

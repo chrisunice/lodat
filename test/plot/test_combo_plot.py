@@ -15,7 +15,7 @@ def result(test_assets_path):
 
 def test_combo_plot(result):
     upper_data = result.loc[2.5]
-    cp = ComboPlot(upper_data)
+    cp = ComboPlot(upper_data, title='')
     success = cp.render()
     assert success
 
