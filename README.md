@@ -38,7 +38,8 @@ d = 10              # depression of interest
 cp = ComboPlot(result.loc[d], title='My Data')
 cp.render()         # will display in default browser
 ```
-<h5 align="center">All data</h5>
+
+[comment]: <> (<h5 align="center">All data</h5>)
 ![](reference/images/entire_plot.png)
 
 [comment]: <> (<h5 align="center">Subset of data</h5>)
