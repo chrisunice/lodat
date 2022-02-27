@@ -24,7 +24,7 @@ pol = 'HH'      # horizontal
 vector = test[freq][pol]        # pandas.DataFrame with the collected information
 ```
 
-The main logic is contained in a class called `Algo`. 
+The main logic is contained in a class called `Algo` 
 ```python
 from lodat.analysis import Algo
 algo = Algo(test, base)
@@ -38,10 +38,7 @@ d = 10              # depression of interest
 cp = ComboPlot(result.loc[d], title='My Data')
 cp.render()         # will display in default browser
 ```
-
-[comment]: <> (<h5 align="center">All data</h5>)
+All data
 ![](reference/images/entire_plot.png)
-
-[comment]: <> (<h5 align="center">Subset of data</h5>)
-
-[comment]: <> (![]&#40;reference/images/zoomed_plot.png&#41;)
+Subset of data
+![](reference/images/zoomed_plot.png)
