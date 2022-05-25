@@ -1,6 +1,7 @@
 from dash import html
 import dash_bootstrap_components as dbc
 
+
 navbar = dbc.Navbar(
     children=[
         html.I(

@@ -1,6 +1,7 @@
 from dash import html, dcc
 import dash_bootstrap_components as dbc
 
+
 sidebar = dbc.Offcanvas(
     children=[
         dcc.Link('Home', id='home-link', href='/'),
@@ -8,6 +9,8 @@ sidebar = dbc.Offcanvas(
         dcc.Link('Polar Plot', id='polar-link', href='/polarplot'),
         html.Br(),
         dcc.Link('Linear Plot', id='linear-link', href='/linearplot'),
+        html.Br(),
+        dcc.Link('Data Visualization', id='data-vis-link', href='/datavis'),
     ],
     id="sidebar",
     title='Menu',
@@ -20,5 +23,3 @@ sidebar = dbc.Offcanvas(
         width='200px'
     )
 )
-
-

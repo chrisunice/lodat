@@ -1,1 +1,3 @@
 numpy
+dash
+dash-bootstrap-components
