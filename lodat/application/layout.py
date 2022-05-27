@@ -10,7 +10,11 @@ layout = html.Div(
         sidebar,
         html.Div(
             id='page-content',
-            style=dict(display='flex', padding='10px', justifyContent='center')
+            style=dict(
+                display='flex',
+                padding='10px',
+                justifyContent='center',
+            )
         )
     ]
 )
