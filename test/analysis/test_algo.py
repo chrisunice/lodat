@@ -1,5 +1,5 @@
-import pandas as pd
 import pytest
+import pandas as pd
 from lodat.analysis import Algo
 from lodat.data import DataObject
 
