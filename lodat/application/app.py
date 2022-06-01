@@ -6,7 +6,7 @@ app = dash.Dash(
     name='LODAT',
     external_stylesheets=[
         dbc.themes.CYBORG,
-        dbc.icons.FONT_AWESOME
+        dbc.icons.FONT_AWESOME,
     ],
     suppress_callback_exceptions=True
 )

@@ -19,9 +19,7 @@ navbar = dbc.Navbar(
             style=dict(width='100%', textAlign='center')
         )
     ],
-    style=dict(
-        display='flex',
-        height='50px',
-        padding='5px'
-    )
+    style=dict(padding='5px')
 )
+
+

@@ -1,23 +1,26 @@
-from dash import dcc
+import dash_bootstrap_components as dbc
 
 
 def create_tab(tab_name):
-    component = dcc.Tab(
+    tab = dbc.Tab(
         label=tab_name,
-        value=tab_name.lower(),
-        style=dict(padding='0'),
-        selected_style=dict(padding='0')
+        tab_id=tab_name.lower(),
+        tab_style=dict(padding='0'),
+        active_tab_style=dict(padding='0')
     )
-    return component
+    return tab
 
 
-tab_bar = dcc.Tabs(
+tab_bar = dbc.Tabs(
     id='data-vis-tabs',
-    value='polar',
+    class_name='nav nav-tabs',
     children=[
         create_tab('Polar'),
         create_tab('Linear'),
         create_tab('SADA')
     ],
+    active_tab='polar',
     style=dict(display='flex', justifyContent='center', alignItems='center')
 )
+
+

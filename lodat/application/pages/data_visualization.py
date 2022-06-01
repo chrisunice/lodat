@@ -1,17 +1,22 @@
 from dash import html
+import dash_bootstrap_components as dbc
+
 from ..components.tabs import tab_bar
 
-data_vis_page = html.Div(
-    children=[
-        tab_bar,
-        html.Div(
-            id='plot-contents',
-            style=dict(
-                display='flex',
-                justifyContent='center',
-                padding='5px'
-            )
-        )
-    ],
-    style=dict(width='100%')
+data_vis_page = dbc.Row(
+    dbc.Col(
+        children=[
+            dbc.Row(
+                children=[
+                    dbc.Col(
+                        tab_bar,
+                        width=9
+                    )
+                ],
+                justify='center'
+            ),
+            dbc.Row(id='plot-contents', justify='center')
+        ],
+        align='stretch'
+    )
 )
