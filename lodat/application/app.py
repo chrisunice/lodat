@@ -11,7 +11,6 @@ try:
         dbc.icons.FONT_AWESOME
     ]
 except (requests.exceptions.ConnectionError, requests.Timeout):
-    print('Offline, using offline sheets')
     sheets = [
         './assets/cyborg/bootstrap.min.css'
         './assets/fontawesome/all.css'
