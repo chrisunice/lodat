@@ -4,7 +4,7 @@ from .. import pages
 from ..app import app
 
 
-@app.callback(Output('page-contents', 'children'), [Input('url', 'pathname')])
+@app.callback(Output('page-container', 'children'), [Input('url', 'pathname')])
 def display_page(pathname):
     if pathname == '/':
         return pages.home_page
