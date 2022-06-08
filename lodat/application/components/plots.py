@@ -2,9 +2,7 @@ from dash import dcc
 import plotly.graph_objects as go
 
 graph_style = dict()
-graph_config = dict(
-    fillFrame=True
-)
+graph_config = dict()
 
 polar_plot = dcc.Graph(
     id='polar-plot',
