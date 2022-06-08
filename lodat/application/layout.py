@@ -10,19 +10,13 @@ layout = html.Div(
         dcc.Location(id='url', refresh=True),
         dcc.Store(id='store', storage_type='session'),
         navbar,
+        sidebar,
         dbc.Container(
             id='page-container',
-            children=[
-                sidebar,
-                dbc.Row(
-                    id='page-contents',
-                    justify='center',
-                    style=dict(flex='1')
-                )
-            ],
             fluid=True,
             style=dict(
                 display='flex',
+                justifyContent='center',
                 flex='1',
             )
         )
