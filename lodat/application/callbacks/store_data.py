@@ -11,12 +11,16 @@ from ..app import app
     Output('session-store', 'data'),
     Input('upload-data', 'contents'),
     State('upload-data', 'filename'),
+    State('session-store', 'data')
 )
-def store_uploaded_data(content_list, name_list):
+def store_uploaded_data(content_list, name_list, existing_data):
     if content_list is not None:
 
-        # Data dictionary to fill
-        data = dict()
+        # Check to see if data already exists in the session
+        if existing_data is not None:
+            data = json.loads(existing_data)
+        else:
+            data = dict()
 
         # Step through all the data loaded
         for content, name in zip(content_list, name_list):
