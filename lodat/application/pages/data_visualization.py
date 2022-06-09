@@ -1,37 +1,33 @@
-import dash_bootstrap_components as dbc
+from dash import html
 
 from ..components.tabs import tab_bar
 
-data_vis_page = dbc.Row(
+page_styles = {
+    'display': 'flex',
+    'flex-direction': 'column',
+    'align-items': 'center',
+    'width': '100%',
+    'padding': '10px',
+}
+
+row1_styles = {
+    'width': '75%'
+}
+
+row2_styles = {
+    'display': 'flex',
+    'flex': '1',
+    'align-items': 'center',
+    'justify-content': 'center',
+    'width': '90%',
+    'margin': '10px',
+}
+
+data_vis_page = html.Div(
+    id='data-vis-page',
     children=[
-        dbc.Col(
-            children=[
-                dbc.Row(
-                    id='row-1',
-                    children=[
-                        dbc.Col(
-                            id='tab-contents',
-                            children=[tab_bar],
-                            width=9
-                        )
-                    ],
-                    justify='center'
-                ),
-                dbc.Row(
-                    id='row-2',
-                    children=[
-                        dbc.Col(
-                            id='plot-contents'
-                        )
-                    ],
-                    # align='stretch',
-                    # style=dict(flex='1')
-                )
-            ],
-            align='stretch'
-        ),
+        html.Div(id='row-1', children=[tab_bar], style=row1_styles),
+        html.Div(id='row-2', style=row2_styles)
     ],
-    # align='center',
-    # justify='center',
-    style=dict(width='100%')
+    style=page_styles
 )
