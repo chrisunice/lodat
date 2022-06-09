@@ -1,8 +1,18 @@
 from dash import html, dcc
-import dash_bootstrap_components as dbc
 
 from .components.navbar import navbar
 from .components.sidebar import sidebar
+
+app_styles = {
+    'display': 'flex',
+    'flex-direction': 'column',
+    'min-height': '100vh'
+}
+
+container_styles = {
+    'display': 'flex',
+    'flex': '1',
+}
 
 layout = html.Div(
     id='dash-layout',
@@ -11,19 +21,7 @@ layout = html.Div(
         dcc.Store(id='store', storage_type='session'),
         navbar,
         sidebar,
-        dbc.Container(
-            id='page-container',
-            fluid=True,
-            style=dict(
-                display='flex',
-                justifyContent='center',
-                flex='1',
-            )
-        )
+        html.Div(id='page-container', style=container_styles)
     ],
-    style={
-        'display': 'flex',
-        'flex-flow': 'column',
-        'min-height': '100vh'
-    }
+    style=app_styles
 )

@@ -1,20 +1,17 @@
-import dash_bootstrap_components as dbc
+from dash import html
 
 from ..components.upload import upload
 
+page_styles = {
+    'display': 'flex',
+    'justify-content': 'center',
+    'align-items': 'center',
+    'width': '100%'
+}
 
-home_page = dbc.Row(
-    id='home-contents',
-    children=[
-        dbc.Col(
-            children=[
-                upload
-            ],
-            width=6,
-            align='center'
-        )
-    ],
-    justify='center',
-    style=dict(width='100%')
+home_page = html.Div(
+    id='home-page',
+    children=[upload],
+    style=page_styles
 )
 
