@@ -2,20 +2,23 @@ import io
 import json
 import base64
 import pandas as pd
+from dash.exceptions import PreventUpdate
 from dash.dependencies import Input, Output, State
 
 from ..app import app
 
 
 @app.callback(
-    Output('session-store', 'data'),
+    [Output('session-store', 'data'),
+     Output('loading-state', 'children')],
     Input('upload-data', 'contents'),
     State('upload-data', 'filename'),
     State('session-store', 'data')
 )
 def store_uploaded_data(content_list, name_list, existing_data):
-    if content_list is not None:
-
+    if content_list is None:
+        raise PreventUpdate
+    else:
         # Check to see if data already exists in the session
         if existing_data is not None:
             data = json.loads(existing_data)
@@ -35,4 +38,4 @@ def store_uploaded_data(content_list, name_list, existing_data):
                 data[name] = df.to_dict()
 
         # Convert dictionary to JSON string
-        return json.dumps(data)
+        return json.dumps(data), ""
