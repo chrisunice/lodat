@@ -22,7 +22,7 @@ home_page = html.Div(
                 style=dict(width='50px', height='50px')
             ),
             color='primary',
-            delay_hide=100 # in milliseconds
+            delay_hide=100  # in milliseconds
         )
     ],
     style=page_styles

@@ -11,7 +11,7 @@ if __name__ == '__main__':
     depressions = [2.5, -7.5]
 
     # Aircraft collection parameters
-    hits_per_bin = 15
+    hits_per_bin = 200
     data = pd.DataFrame()
     for depr in depressions:
         for freq in frequencies:
@@ -40,17 +40,17 @@ if __name__ == '__main__':
                 growths = np.random.randint(0, 100, size=(num_growths,))
                 rcs[rand_idx] = rcs[rand_idx] + growths
 
-                data = data.append(
-                    pd.DataFrame(
-                        data=dict(
-                            Look=look,
-                            Depression=depression,
-                            Twist=twist,
-                            Frequency=freq,
-                            Polarization=pol,
-                            RCS=rcs
-                        )
+                tmp = pd.DataFrame(
+                    data=dict(
+                        Look=look,
+                        Depression=depression,
+                        Twist=twist,
+                        Frequency=freq,
+                        Polarization=pol,
+                        RCS=rcs
                     )
                 )
-    output_path = f"C:\\LODAT\\test_data.csv"
+                data = pd.concat((data, tmp))
+
+    output_path = f"C:\\LODAT\\large_data.csv"
     data.to_csv(output_path)
