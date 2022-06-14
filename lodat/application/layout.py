@@ -18,7 +18,8 @@ layout = html.Div(
     id='dash-layout',
     children=[
         dcc.Location(id='url', refresh=True),
-        dcc.Store(id='session-store', storage_type='session'),
+        # dcc.Store(id='session-store', storage_type='session'),
+        dcc.Loading(dcc.Store(id="cache-store"), fullscreen=True, type="dot"),  # todo still work to be done here
         navbar,
         sidebar,
         html.Div(id='page-container', style=container_styles)
