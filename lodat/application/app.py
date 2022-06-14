@@ -1,5 +1,5 @@
-import dash
 import dash_bootstrap_components as dbc
+from dash_extensions.enrich import DashProxy, ServersideOutputTransform
 
 import requests
 
@@ -17,8 +17,9 @@ except (requests.exceptions.ConnectionError, requests.Timeout):
     ]
 
 # Application set up
-app = dash.Dash(
+app = DashProxy(
     name='LODAT',
     external_stylesheets=sheets,
-    suppress_callback_exceptions=True
+    suppress_callback_exceptions=True,
+    transforms=[ServersideOutputTransform()]
 )
