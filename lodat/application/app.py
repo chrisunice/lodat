@@ -1,7 +1,9 @@
-import dash_bootstrap_components as dbc
-from dash_extensions.enrich import DashProxy, ServersideOutputTransform
-
+import dash
 import requests
+import dash_uploader
+import dash_bootstrap_components as dbc
+from configparser import ConfigParser
+
 
 # Stylesheets
 try:
@@ -17,9 +19,17 @@ except (requests.exceptions.ConnectionError, requests.Timeout):
     ]
 
 # Application set up
-app = DashProxy(
+app = dash.Dash(
     name='LODAT',
     external_stylesheets=sheets,
-    suppress_callback_exceptions=True,
-    transforms=[ServersideOutputTransform()]
+    suppress_callback_exceptions=True
+)
+
+# Configure upload to server
+config = ConfigParser()
+config.read('./config.ini')
+dash_uploader.configure_upload(
+    app=app,
+    folder=config['DEFAULT']['upload_folder'],
+    use_upload_id=True
 )
