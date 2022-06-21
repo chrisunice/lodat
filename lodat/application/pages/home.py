@@ -1,5 +1,4 @@
 from dash import html, dcc
-import dash_bootstrap_components as dbc
 
 from ..components.upload import upload
 
@@ -16,14 +15,7 @@ home_page = html.Div(
     id='home-page',
     children=[
         upload,
-        dbc.Spinner(
-            html.Div(
-                id='loading-state',
-                style=dict(width='50px', height='50px')
-            ),
-            color='primary',
-            delay_hide=100  # in milliseconds
-        )
+        html.Div(id='upload-data-output')
     ],
     style=page_styles
 )
