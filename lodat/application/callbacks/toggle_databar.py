@@ -7,7 +7,7 @@ from ..app import app
     Output('databar', 'is_open'),
     [
         Input('filter-icon', 'n_clicks'),
-        # this is where the submit button would go
+        # todo this is where the submit button would go
     ],
     State('databar', 'is_open')
 )
