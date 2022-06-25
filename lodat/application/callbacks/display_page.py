@@ -8,12 +8,7 @@ from ..app import app
 def display_page(pathname):
     if pathname == '/':
         return pages.home_page
-    elif pathname == '/polarplot':
-        return pages.polar_page
-    elif pathname == '/linearplot':
-        return pages.linear_page
     elif pathname == '/datavis':
         return pages.data_vis_page
     else:
-        # TODO add 404 error page not found
-        return None
+        return pages.home_page
