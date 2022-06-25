@@ -1,6 +1,7 @@
 from dash import html
 
 from ..components.tabs import tab_bar
+from ..components.databar import databar
 
 page_styles = {
     'display': 'flex',
@@ -26,6 +27,7 @@ row2_styles = {
 data_vis_page = html.Div(
     id='data-vis-page',
     children=[
+        databar,
         html.Div(id='row-1', children=[tab_bar], style=row1_styles),
         html.Div(id='row-2', style=row2_styles)
     ],
