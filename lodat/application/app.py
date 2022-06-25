@@ -23,7 +23,7 @@ app = dash.Dash(
     name='LODAT',
     external_stylesheets=sheets,
     suppress_callback_exceptions=True,
-    # prevent_initial_callbacks=True
+    prevent_initial_callbacks=True
 )
 
 # Configure upload to server
