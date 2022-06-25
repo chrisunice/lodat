@@ -6,10 +6,6 @@ sidebar = dbc.Offcanvas(
     children=[
         dcc.Link('Home', id='home-link', href='/'),
         html.Br(),
-        dcc.Link('Polar Plot', id='polar-link', href='/polarplot'),
-        html.Br(),
-        dcc.Link('Linear Plot', id='linear-link', href='/linearplot'),
-        html.Br(),
         dcc.Link('Data Visualization', id='data-vis-link', href='/datavis'),
     ],
     id="sidebar",
@@ -23,3 +19,6 @@ sidebar = dbc.Offcanvas(
         width='200px'
     )
 )
+
+
+# TODO need to figure out how to center and space the sidebar contents
