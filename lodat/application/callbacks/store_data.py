@@ -1,4 +1,3 @@
-import os
 import json
 import dash_uploader
 from dash.dependencies import Output
@@ -15,7 +14,7 @@ def store_uploaded_data(status):
     """
     data = {
         'session-id': status.upload_id,
-        'files': list(map(lambda x: str(os.path.basename(x)), status.uploaded_files))
+        'files': list(map(lambda x: str(x), status.uploaded_files))
     }
     json_string = json.dumps(data)
     return None, json_string
