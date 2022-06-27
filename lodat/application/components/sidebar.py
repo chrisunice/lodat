@@ -4,9 +4,18 @@ import dash_bootstrap_components as dbc
 
 sidebar = dbc.Offcanvas(
     children=[
-        dcc.Link('Home', id='home-link', href='/'),
-        html.Br(),
-        dcc.Link('Data Visualization', id='data-vis-link', href='/datavis'),
+        html.Div(
+            children=[
+                dcc.Link('Home', id='home-link', href='/'),
+                html.Br(),
+                dcc.Link('Data Visualization', id='data-vis-link', href='/datavis'),
+            ],
+            style={
+                'display': 'flex',
+                'flex-direction': 'column',
+                'align-items': 'center'
+            }
+        )
     ],
     id="sidebar",
     title='Menu',
