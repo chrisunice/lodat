@@ -4,8 +4,12 @@ from .. import pages
 from ..app import app
 
 
-@app.callback(Output('page-container', 'children'), [Input('url', 'pathname')])
+@app.callback(
+    Output('page-container', 'children'),
+    Input('url', 'pathname')
+)
 def display_page(pathname):
+    print(__name__, pathname)
     if pathname == '/':
         return pages.home_page
     elif pathname == '/datavis':
