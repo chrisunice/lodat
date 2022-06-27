@@ -5,3 +5,4 @@ from .store_data import store_uploaded_data
 from .switch_tabs import switch_tabs
 from .show_filter_icon import show_filter_icon
 from .toggle_databar import toggle_databar
+from .populate_data_selector import data_source
