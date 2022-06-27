@@ -9,7 +9,6 @@ from ..app import app
     Input('url', 'pathname')
 )
 def display_page(pathname):
-    print(__name__, pathname)
     if pathname == '/':
         return pages.home_page
     elif pathname == '/datavis':
