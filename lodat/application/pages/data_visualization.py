@@ -2,6 +2,7 @@ from dash import html
 
 from ..components.tabs import tab_bar
 from ..components.databar import databar
+from ..components.plots import polar_plot
 
 page_styles = {
     'display': 'flex',
@@ -29,7 +30,7 @@ data_vis_page = html.Div(
     children=[
         databar,
         html.Div(id='row-1', children=[tab_bar], style=row1_styles),
-        html.Div(id='row-2', style=row2_styles)
+        html.Div(id='row-2', children=[polar_plot], style=row2_styles)
     ],
     style=page_styles
 )
