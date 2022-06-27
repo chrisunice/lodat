@@ -3,3 +3,13 @@
     padding: 0;
     box-sizing: border-box;
 }
+
+.offcanvas-header{
+    display: flex;
+    justify-content: center;
+}
+
+.offcanvas-body {
+    display: flex;
+    flex-direction: column;
+}
