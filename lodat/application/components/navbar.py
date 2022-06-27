@@ -8,19 +8,34 @@ navbar = dbc.Navbar(
         html.I(
             id='menu-icon',
             className='fa-solid fa-bars fa-2xl',
-            style=dict(color='white')
+            style=dict(
+                position='absolute',
+                left='10px',
+                color='white'
+            )
         ),
         html.Div(
             html.H5(
                 'Low Observable Data Analysis Toolkit',
                 style=dict(margin='0px')
             ),
-            style=dict(width='100%', textAlign='center')
+            style=dict(
+                position='absolute',
+                left='50%',
+                width='500px',
+                marginLeft='-250px',
+                textAlign='center'
+            )
         ),
         html.I(
             id='filter-icon',
             className='fa-solid fa-filter fa-2xl',
-            style={'color': 'white', 'display': 'none'}
+            style={
+                'position': 'absolute',
+                'right': '10px',
+                'color': 'white',
+                'display': 'none'
+            }
         )
     ],
     style=dict(
