@@ -1,29 +1,44 @@
-from dash import html
+from dash import html, dcc
 import dash_bootstrap_components as dbc
 
 
 databar = dbc.Offcanvas(
     id='databar',
     children=[
-        dbc.Accordion(
-            children=[
-                dbc.AccordionItem('No data loaded', id='data-selector-source', title='Data Source'),
-                dbc.AccordionItem('No frequencies available', id='data-selector-freq', title='Frequency'),
-                dbc.AccordionItem('No polarizations available', id='data-selector-pol', title='Polarization')
-            ],
-            flush=True,
-            start_collapsed=True,
-            always_open=True
+        dbc.Spinner(
+            dbc.Accordion(
+                children=[
+                    dbc.AccordionItem('No data loaded', id='data-selector-source', title='Data Source'),
+                    dbc.AccordionItem('No frequencies available', id='data-selector-freq', title='Frequency'),
+                    dbc.AccordionItem('No polarizations available', id='data-selector-pol', title='Polarization')
+                ],
+                flush=True,
+                start_collapsed=True,
+                always_open=True
+            ),
+            color='primary',
+            delay_show=10
         ),
         html.Div(
             children=[
-                dbc.Button('Submit', id='submit-button', color='primary'),
-                dbc.Button('Reset', id='reset-button', color='secondary')
+                html.Div(
+                    children=[
+                        dbc.Button('Submit', id='submit-button', color='primary', style=dict(width='60%')),
+                        dbc.Button('Reset', id='reset-button', color='secondary', style=dict(width='35%'))
+                    ],
+                    style={
+                        'display': 'flex',
+                        'justify-content': 'space-between',
+                        'margin-top': '10px'
+                    }
+                )
             ],
             style={
                 'display': 'flex',
-                'justify-content': 'space-evenly',
-                'margin': '5px'
+                'flex-direction': 'column',
+                'flex': '1',
+                'justify-content': 'flex-end',
+                'width': '100%'
             }
         )
     ],
