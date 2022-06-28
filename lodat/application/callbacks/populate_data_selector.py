@@ -59,7 +59,8 @@ def data_source(filter_click, data, original_content):
 )
 def vector_group(sources):
     # Once a data source has been checked
-    if sources is None:
+    no_sources = not bool(sources)
+    if sources is None or no_sources:
         raise PreventUpdate
 
     freqs = []
@@ -69,9 +70,12 @@ def vector_group(sources):
         freqs += obj.frequencies
         pols += obj.polarizations
 
+    freqs = list(map(float, set(freqs)))
+    freqs.sort()
+    options = [dict(label=f"{freq} MHz", value=f"{freq:.1f}") for freq in freqs]
     freq_checklist = dcc.Checklist(
         id='freq-checklist',
-        options=list(map(lambda x: f"{x} MHz", set(freqs))),
+        options=options,
         style=checklist_style,
         inputStyle=input_style,
         persistence=True,
