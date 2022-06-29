@@ -1,10 +1,12 @@
 import numpy as np
 import pandas as pd
-from typing import Union
+
+from lodat.domain.utils import get_bin
 
 
 class DataObject:
 
+    is_bin_data = False
     frequencies: list[str] = None
     polarizations: list[str] = None
 
@@ -34,30 +36,19 @@ class DataObject:
                 data[freq][pol] = self.raw_data[vector_mask]
         return data
 
-    def slice_data(self, frequency: float, polarization: str, look: Union[int, float],
-                   depression: Union[int, float], bin_size: tuple[int, int] = (1, 5)):
-        # Handle parameters
-        freq = f"{float(frequency):.1f}"
-        pol = polarization.upper()
+    def get_bin_data(self, frequency: float, polarization: str, depression: float, bin_size=(1, 5)):
 
+        freq = f"{frequency:.1f}"
+        pol = polarization.upper()
         vector = self.data[freq][pol]
 
-        # Filter by depression
-        depr_width = bin_size[1]
-        d0 = depression - depr_width/2
-        d1 = depression + depr_width/2
-        depr_mask = np.logical_and(vector.Depression >= d0, vector.Depression < d1)
+        bin_data = pd.DataFrame()
+        for look in np.arange(0, 360, bin_size[1]):
+            bin_ = get_bin(vector, look, depression, bin_size)
+            bin_data = pd.concat((bin_data, bin_))
+        return bin_data
 
-        # Filter by look
-        look_width = bin_size[0]
-        l0 = look - look_width/2
-        l1 = look + look_width/2
-        if l0 < 0:
-            l0 = 360 + l0
-            logical_op = np.logical_or
-        else:
-            logical_op = np.logical_and
-        look_mask = logical_op(vector.Look >= l0, vector.Look < l1)
 
-        bin_mask = np.logical_and(depr_mask, look_mask)
-        return vector[bin_mask]
+
+
+
