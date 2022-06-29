@@ -10,7 +10,8 @@ databar = dbc.Offcanvas(
                 children=[
                     dbc.AccordionItem('No data loaded', id='data-selector-source', title='Data Source'),
                     dbc.AccordionItem('No frequencies available', id='data-selector-freq', title='Frequency'),
-                    dbc.AccordionItem('No polarizations available', id='data-selector-pol', title='Polarization')
+                    dbc.AccordionItem('No polarizations available', id='data-selector-pol', title='Polarization'),
+                    dbc.AccordionItem('No depressions available', id='data-selector-depr', title='Depression')
                 ],
                 flush=True,
                 start_collapsed=True,

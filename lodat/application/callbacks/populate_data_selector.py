@@ -55,6 +55,7 @@ def data_source(filter_click, data, original_content):
 @app.callback(
     Output('data-selector-freq', 'children'),
     Output('data-selector-pol', 'children'),
+    Output('data-selector-depr', 'children'),
     Input('file-checklist', 'value')
 )
 def vector_group(sources):
@@ -65,10 +66,12 @@ def vector_group(sources):
 
     freqs = []
     pols = []
+    deprs = []
     for source in sources:
         obj = DataObject(source)
         freqs += obj.frequencies
         pols += obj.polarizations
+        deprs.append((obj.raw_data.Depression.min().round(), obj.raw_data.Depression.max().round()))
 
     freqs = list(map(float, set(freqs)))
     freqs.sort()
@@ -88,4 +91,14 @@ def vector_group(sources):
         style=checklist_style,
         inputStyle=input_style
     )
-    return freq_checklist, pol_checklist
+
+    # Min and max depression are determined by where common depressions exist
+    depr_slider = dcc.RangeSlider(
+        id='depr-slider',
+        min=max([tup[0] for tup in deprs]),
+        max=min([tup[1] for tup in deprs]),
+        step=1,
+        tooltip={'placement': 'left', 'always_visible': True},
+        vertical=True
+    )
+    return freq_checklist, pol_checklist, depr_slider
