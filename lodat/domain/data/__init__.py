@@ -38,17 +38,12 @@ class DataObject:
 
     def get_bin_data(self, frequency: float, polarization: str, depression: float, bin_size=(1, 5)):
 
-        freq = f"{frequency:.1f}"
+        freq = f"{float(frequency):.1f}"
         pol = polarization.upper()
         vector = self.data[freq][pol]
 
-        bin_data = pd.DataFrame()
-        for look in np.arange(0, 360, bin_size[1]):
+        bin_data = dict()
+        for look in np.arange(0, 360, bin_size[0]):
             bin_ = get_bin(vector, look, depression, bin_size)
-            bin_data = pd.concat((bin_data, bin_))
-        return bin_data
-
-
-
-
-
+            bin_data[look] = bin_.mean()
+        return pd.DataFrame(bin_data).T
