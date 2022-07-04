@@ -1,6 +1,7 @@
 import os
 import uuid
 import dash_uploader
+import dash_bootstrap_components as dbc
 
 upload_style = {
     'display': 'flex',
@@ -16,9 +17,23 @@ upload_style = {
     'margin': '10px'
 }
 
-upload = dash_uploader.Upload(
-    id='upload-data',
-    text='Upload Data',
-    default_style=upload_style,
-    upload_id=f"{os.getlogin()}-{str(uuid.uuid4())}" # Note this may not work for different users
+upload = dbc.Modal(
+    id='upload-modal',
+    children=[
+        dbc.ModalHeader(dbc.ModalTitle('Upload Data')),
+        dbc.ModalBody(
+            dash_uploader.Upload(
+                id='upload-data',
+                text='Upload Data',
+                default_style=upload_style,
+                upload_id=f"{os.getlogin()}-{str(uuid.uuid4())}"  # Note this may not work for different users
+            )
+        ),
+        dbc.ModalFooter(
+            dbc.Button('Close', className='primary', id='upload-modal-close')
+        )
+    ],
+    is_open=False
 )
+
+
