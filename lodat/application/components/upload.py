@@ -1,3 +1,7 @@
+"""
+Note this may not work for different users because the os.getlogin() may be specific to the server not the client
+TODO to figure out how to maintain the same unique session id for a users session, it changes each time
+"""
 import os
 import uuid
 import dash_uploader
@@ -8,7 +12,6 @@ upload_style = {
     'justify-content': 'center',
     'align-items': 'center',
     'width': '100%',
-    # 'height': '60px',
     'lineHeight': '60px',
     'borderWidth': '1px',
     'borderStyle': 'dashed',
@@ -26,7 +29,7 @@ upload = dbc.Modal(
                 text='Drag and Drop or Click to Upload',
                 chunk_size=5,
                 default_style=upload_style,
-                upload_id=f"{os.getlogin()}-{str(uuid.uuid4())}"  # Note this may not work for different users
+                upload_id=f"{os.getlogin()}-{str(uuid.uuid4())}"
             )
         ),
         dbc.ModalFooter(
@@ -35,5 +38,3 @@ upload = dbc.Modal(
     ],
     is_open=False
 )
-
-
