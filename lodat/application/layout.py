@@ -27,7 +27,7 @@ def serve_layout():
             html.Div(id='upload-data-output'),
             navbar,
             sidebar,
-            html.Div(id='page-container', style=container_styles)
+            html.Div(id='page-container', style=container_styles),
         ],
         style=app_styles
     )
