@@ -7,8 +7,8 @@ upload_style = {
     'display': 'flex',
     'justify-content': 'center',
     'align-items': 'center',
-    'width': '33%',
-    'height': '60px',
+    'width': '100%',
+    # 'height': '60px',
     'lineHeight': '60px',
     'borderWidth': '1px',
     'borderStyle': 'dashed',
@@ -20,11 +20,11 @@ upload_style = {
 upload = dbc.Modal(
     id='upload-modal',
     children=[
-        dbc.ModalHeader(dbc.ModalTitle('Upload Data')),
         dbc.ModalBody(
             dash_uploader.Upload(
                 id='upload-data',
-                text='Upload Data',
+                text='Drag and Drop or Click to Upload',
+                chunk_size=5,
                 default_style=upload_style,
                 upload_id=f"{os.getlogin()}-{str(uuid.uuid4())}"  # Note this may not work for different users
             )
