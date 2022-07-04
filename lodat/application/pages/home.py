@@ -1,6 +1,4 @@
-from dash import html, dcc
-
-from ..components.upload import upload
+from dash import html
 
 page_styles = {
     'display': 'flex',
@@ -14,8 +12,7 @@ page_styles = {
 home_page = html.Div(
     id='home-page',
     children=[
-        upload,
-        html.Div(id='upload-data-output')
+        html.H6('Select an option in the menu'),
     ],
     style=page_styles
 )

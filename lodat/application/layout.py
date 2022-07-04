@@ -24,6 +24,7 @@ def serve_layout():
                 id='session-store',
                 storage_type='session',
             ),
+            html.Div(id='upload-data-output'),
             navbar,
             sidebar,
             html.Div(id='page-container', style=container_styles)

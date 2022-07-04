@@ -1,8 +1,10 @@
 from dash import html, dcc
 import dash_bootstrap_components as dbc
+from ..components.upload import upload
 
 
 def horizontal_line():
+    """ Creates a horizontal line """
     style = dict(
         width='100%',
         height='1px',
@@ -12,6 +14,7 @@ def horizontal_line():
 
 
 def menu_item(id_name, icon_name, text):
+    """ Creates a menu row item with icon and text """
     button_style = dict(display='flex', alignItems='center')
     icon_style = dict(color='white')
     text_style = dict(color='white', marginLeft='10px', fontSize='1rem')
@@ -37,32 +40,25 @@ sidebar = dbc.Offcanvas(
                 html.H5('Menu'),
                 horizontal_line(),
                 menu_item('menu-upload', 'upload', 'Upload'),
+                upload,
+                horizontal_line(),
+                dcc.Link(menu_item('menu-home', 'home', 'Home'), href='/', className='text-decoration-none'),
                 horizontal_line(),
                 dcc.Link(
                     menu_item('menu-data-vis', 'chart-area', 'Data Visualization'),
-                    id='data-vis-link',
                     href='/datavis',
                     className='text-decoration-none'
                 ),
                 horizontal_line()
             ],
-            style={
-                'display': 'flex',
-                'flex-direction': 'column',
-                'align-items': 'center',
-            }
+            style={'display': 'flex', 'flex-direction': 'column', 'align-items': 'center'}
         )
     ],
     id="sidebar",
     scrollable=True,
     is_open=False,
     close_button=False,
-    style=dict(
-        display='flex',
-        marginTop='50px',
-        width='200px',
-        padding='0px',
-    )
+    style={'display': 'flex', 'marginTop': '50px', 'width': '200px', 'padding': '0px'}
 )
 
 
