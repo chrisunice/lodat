@@ -7,3 +7,4 @@ from .show_filter_icon import show_filter_icon
 from .toggle_databar import toggle_databar
 from .populate_data_selector import data_source, vector_group
 from .render_plot import render_plot
+from .toggle_upload import toggle_upload_window
