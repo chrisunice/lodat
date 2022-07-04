@@ -9,9 +9,11 @@ from ..app import app
     Input('url', 'pathname')
 )
 def display_page(pathname):
-    if pathname == '/':
+    if pathname == '/home':
         return pages.home_page
-    elif pathname == '/datavis':
+    elif pathname == '/data-visualization':
         return pages.data_vis_page
+    elif pathname == '/imagery':
+        print('no page yet')
     else:
         return pages.home_page
