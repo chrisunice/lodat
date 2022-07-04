@@ -13,24 +13,29 @@ def horizontal_line():
     return html.Hr(style=style)
 
 
-def menu_item(id_name, icon_name, text):
+def menu_item(id_name: str, icon_name: str, text: str, link: bool = True):
     """ Creates a menu row item with icon and text """
-    button_style = dict(display='flex', alignItems='center')
+    container_style = dict(display='flex', width='100%')
+    button_style = dict(alignItems='center')
     icon_style = dict(color='white')
     text_style = dict(color='white', marginLeft='10px', fontSize='1rem')
-    return html.Div(
-        dbc.Button(
-            id=id_name,
-            children=[
-                html.I(className=f"fa-solid fa-{icon_name} fa-xl", style=icon_style),
-                html.Span(text, style=text_style)
-            ],
-            color='link',
-            className='text-decoration-none',
-            style=button_style
-        ),
-        style=dict(display='flex')
+
+    button = dbc.Button(
+        [
+            html.I(className=f"fa-solid fa-{icon_name} fa-xl", style=icon_style),
+            html.Span(text, style=text_style)
+        ],
+        id=id_name,
+        color='link',
+        className='text-decoration-none',
+        style=button_style
     )
+
+    if not link:
+        return html.Div(button, style=container_style)
+    else:
+        page_name = f"/{'-'.join(text.lower().split( ))}"
+        return dcc.Link(button, href=page_name, style=container_style, className='text-decoration-none')
 
 
 sidebar = dbc.Offcanvas(
@@ -39,17 +44,14 @@ sidebar = dbc.Offcanvas(
             children=[
                 html.H5('Menu'),
                 horizontal_line(),
-                menu_item('menu-upload', 'upload', 'Upload'),
+                menu_item('menu-upload', 'upload', 'Upload', link=False),
                 upload,
                 horizontal_line(),
-                dcc.Link(menu_item('menu-home', 'home', 'Home'), href='/', className='text-decoration-none'),
+                menu_item(id_name='menu-home', icon_name='home', text='Home', link=True),
                 horizontal_line(),
-                dcc.Link(
-                    menu_item('menu-data-vis', 'chart-area', 'Data Visualization'),
-                    href='/datavis',
-                    className='text-decoration-none'
-                ),
-                horizontal_line()
+                menu_item(id_name='menu-data-vis', icon_name='chart-area', text='Data Visualization', link=True),
+                horizontal_line(),
+                menu_item(id_name='menu-imagery', icon_name='images', text='Imagery', link=True),
             ],
             style={'display': 'flex', 'flex-direction': 'column', 'align-items': 'center'}
         )
