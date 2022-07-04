@@ -60,6 +60,3 @@ sidebar = dbc.Offcanvas(
     close_button=False,
     style={'display': 'flex', 'marginTop': '50px', 'width': '200px', 'padding': '0px'}
 )
-
-
-# TODO need to figure out how to center and space the sidebar contents
