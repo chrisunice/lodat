@@ -1,6 +1,6 @@
 from dash.dependencies import Output, Input, State
 
-from ..app import app
+from lodat.application.app import app
 
 
 @app.callback(
@@ -9,7 +9,7 @@ from ..app import app
     State('filter-icon', 'style')
 )
 def show_filter_icon(pathname: str, style: dict):
-    on_data_vis_page = pathname == '/datavis'
+    on_data_vis_page = pathname == '/data-visualization'
     if on_data_vis_page:
         style['display'] = 'inline'
     else:

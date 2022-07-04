@@ -4,7 +4,7 @@ from dash import dcc
 from dash.exceptions import PreventUpdate
 from dash.dependencies import Input, Output, State
 
-from ..app import app
+from lodat.application.app import app
 from lodat.domain.data import DataObject
 
 

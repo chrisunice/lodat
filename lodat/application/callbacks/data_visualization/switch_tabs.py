@@ -1,7 +1,7 @@
 from dash.dependencies import Input, Output
 
-from ..app import app
-from ..components.plots import polar_plot, linear_plot
+from lodat.application.app import app
+from lodat.application.components.plots import polar_plot, linear_plot
 
 
 @app.callback(
