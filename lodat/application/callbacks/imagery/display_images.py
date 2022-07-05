@@ -1,13 +1,12 @@
 import os
 import glob
 import flask
-from dash import html
 from dash.dependencies import Input, Output
 
 from lodat.application.app import app
+from lodat.application import config
 
-image_directory = "C:/LODAT/test_assets/images/"
-list_of_images = [os.path.basename(x) for x in glob.glob('{}*.png'.format(image_directory))]
+list_of_images = [os.path.basename(x) for x in glob.glob('{}*.png'.format(config.image_folder))]
 static_image_route = '/static/'
 
 
@@ -17,26 +16,22 @@ def serve_images(image_path):
     image_name = f"{image_path}.png"
     if image_name not in list_of_images:
         raise Exception('"{}" is excluded from the allowed static files'.format(image_path))
-    return flask.send_from_directory(image_directory, image_name)
+    return flask.send_from_directory(config.image_folder, image_name)
 
 
 @app.callback(
     Output('imagery-carousel', 'items'),
-    Output('test-image', 'src'),
-    # Input('menu-imagery', 'n_clicks'),
-    # Input('test-div', 'loading_state'),
     Input('test-button', 'n_clicks')
 )
 def display_images(click):
     if click:
-        retval1 = [dict(key=str(idx), src=f'{static_image_route}{path}') for idx, path in enumerate(list_of_images)]
-        retval2 = static_image_route + list_of_images[0]
-        return retval1, retval2
-
-# def get_images():
-#     TEST_ASSETS_FOLDER = r"C:\LODAT\test_assets\images"     # note only hard coded this for now
-#     images = glob.glob(f"{TEST_ASSETS_FOLDER}\\*.png")
-#     return [dict(key=str(idx), src=path) for idx, path in enumerate(images)]
-
-
-
+        items = []
+        for idx, path in enumerate(list_of_images):
+            items.append(
+                dict(
+                    key=str(idx),
+                    src=f'{static_image_route}{path}',
+                    caption=f'{os.path.splitext(path)[0]}'
+                )
+            )
+        return items
