@@ -2,7 +2,8 @@ import dash
 import requests
 import dash_uploader
 import dash_bootstrap_components as dbc
-from configparser import ConfigParser
+
+from lodat.application import config
 
 
 # Stylesheets
@@ -27,10 +28,8 @@ app = dash.Dash(
 )
 
 # Configure upload to server
-config = ConfigParser()
-config.read('./config.ini')
 dash_uploader.configure_upload(
     app=app,
-    folder=config['DEFAULT']['upload_folder'],
+    folder=config.upload_folder,
     use_upload_id=True
 )
