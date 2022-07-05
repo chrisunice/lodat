@@ -25,8 +25,7 @@ imagery_page = html.Div(
                 {
                     'key': '1',
                     'src': '../static/black_image.jpg',
-                    'header': 'This is my header',
-                    'caption': 'This is my caption'
+                    'caption': 'Select a database to begin'
                 }
             ],
             ride=False,
