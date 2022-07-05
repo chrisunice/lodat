@@ -36,12 +36,19 @@ navbar = dbc.Navbar(
                 'color': 'white',
                 'display': 'none'
             }
+        ),
+        html.I(
+            id='database-icon',
+            className='fa-solid fa-database fa-2xl',
+            style={
+                'position': 'absolute',
+                'right': '10px',
+                'color': 'white',
+                'display': 'none'
+            }
         )
     ],
-    style=dict(
-        height='50px',
-        padding='5px'
-    )
+    style={'height': '50px', 'padding': '5px'}
 )
 
 
