@@ -1,5 +1,4 @@
 import os
-import glob
 import flask
 from dash.dependencies import Input, Output
 
@@ -10,7 +9,6 @@ import sqlite3
 
 db = sqlite3.connect(config.imagery_database_path)
 list_of_images = [os.path.basename(path) for path, in db.execute("SELECT ImagePath FROM data")]
-# list_of_images2 = [os.path.basename(path) for path in glob.glob(f"{config.image_folder}/*.png")]
 static_image_route = '/static/'
 
 
