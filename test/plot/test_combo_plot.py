@@ -1,21 +1,19 @@
 import pytest
-from lodat.analysis import Algo
-from lodat.plot import ComboPlot
-from lodat.data import DataObject
+import lodat as lo
 
 
 @pytest.fixture
 def result(test_assets_path):
-    test = DataObject(f"{test_assets_path}\\test_data.csv")
-    base = DataObject(f"{test_assets_path}\\baseline_data.csv")
-    algo = Algo(test, base)
+    test = lo.DataObject(f"{test_assets_path}\\test_data.csv")
+    base = lo.DataObject(f"{test_assets_path}\\baseline_data.csv")
+    algo = lo.Algo(test, base)
     result = algo.analyze(10000, 'VV', True)
     return result
 
 
 def test_combo_plot(result):
     upper_data = result.loc[2.5]
-    cp = ComboPlot(upper_data, title='')
+    cp = lo.plot.ComboPlot(upper_data, title='')
     success = cp.render()
     assert success
 

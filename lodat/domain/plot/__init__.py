@@ -1,1 +1,1 @@
-from lodat.plot.combo import ComboPlot
+from .combo import ComboPlot
