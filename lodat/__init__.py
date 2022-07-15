@@ -11,3 +11,4 @@ from .domain.data import DataObject
 from .domain.analysis import Algo
 from .domain import stats
 from .domain import utils
+from .domain import plot
