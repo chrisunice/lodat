@@ -2,7 +2,8 @@ import numpy as np
 import pandas as pd
 from scipy import stats
 from typing import Union
-from lodat.stats.standarderror import standarderror
+
+from .standarderror import standarderror
 
 
 def uncertainty(array: Union[list, np.ndarray, pd.Series], significance_level: float = 0.05) -> float:
