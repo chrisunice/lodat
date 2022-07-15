@@ -1,13 +1,11 @@
 import numpy as np
 import pandas as pd
 
-from lodat import Configuration
-from lodat.data import DataObject
-from lodat.stats import fences, uncertainty
+import lodat as lo
 
 
-class Algo(Configuration):
-    def __init__(self, data_object_1: DataObject, data_object_2: DataObject):
+class Algo(lo.Configuration):
+    def __init__(self, data_object_1: lo.DataObject, data_object_2: lo.DataObject):
         super(Algo, self).__init__()
         self.do1 = data_object_1
         self.do2 = data_object_2
@@ -25,16 +23,22 @@ class Algo(Configuration):
         df = pd.DataFrame()
         for depr in depr_centers:
             for look in look_centers:
+                # Get vectors groups for each data object
+                freq = f"{frequency:.1f}"
+                pol = polarization.upper()
+                vg1 = self.do1.data[freq][pol]
+                vg2 = self.do2.data[freq][pol]
+
                 # Get hit data
-                test_data = self.do1.slice_data(frequency, polarization, look, depr)
-                base_data = self.do2.slice_data(frequency, polarization, look, depr)
+                test_data = lo.utils.get_bin(vg1, look, depr)
+                base_data = lo.utils.get_bin(vg2, look, depr)
 
                 # Remove outliers
-                test_fences = fences(test_data.RCS.values, float(self.config['ALGORITHM']['coverage_factor']))
+                test_fences = lo.stats.fences(test_data.RCS.values, float(self.config['ALGORITHM']['coverage_factor']))
                 test_mask = np.logical_or(test_data.RCS < test_fences[0], test_data.RCS > test_fences[1])
                 test_data = test_data[~test_mask]
 
-                base_fences = fences(base_data.RCS.values, float(self.config['ALGORITHM']['coverage_factor']))
+                base_fences = lo.stats.fences(base_data.RCS.values, float(self.config['ALGORITHM']['coverage_factor']))
                 base_mask = np.logical_or(base_data.RCS < base_fences[0], base_data.RCS > base_fences[1])
                 base_data = base_data[~base_mask]
 
@@ -52,8 +56,8 @@ class Algo(Configuration):
                 base_gmn = np.mean(base_rcs)
 
                 # Uncertainty
-                test_u = uncertainty(test_rcs, float(self.config['ALGORITHM']['significance_level']))
-                base_u = uncertainty(base_rcs, float(self.config['ALGORITHM']['significance_level']))
+                test_u = lo.stats.uncertainty(test_rcs, float(self.config['ALGORITHM']['significance_level']))
+                base_u = lo.stats.uncertainty(base_rcs, float(self.config['ALGORITHM']['significance_level']))
 
                 # Intervals
                 test_interval = (test_gmn - test_u, test_gmn + test_u)
