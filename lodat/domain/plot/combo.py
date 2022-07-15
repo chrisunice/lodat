@@ -2,7 +2,6 @@ import numpy as np
 import pandas as pd
 import plotly.io as pio
 import plotly.graph_objects as go
-from lodat.utils import detection_range
 from plotly.subplots import make_subplots
 from pandas.core.indexes.multi import MultiIndex
 
