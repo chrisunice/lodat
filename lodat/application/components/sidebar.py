@@ -2,16 +2,7 @@ from dash import html, dcc
 import dash_bootstrap_components as dbc
 
 from ..components.upload import upload
-
-
-def horizontal_line():
-    """ Creates a horizontal line """
-    style = dict(
-        width='100%',
-        height='1px',
-        color='white'
-    )
-    return html.Hr(style=style)
+from ..components.HorizontalLine import HorizontalLine
 
 
 def menu_item(id_name: str, icon_name: str, text: str, link: bool = True):
@@ -44,14 +35,14 @@ sidebar = dbc.Offcanvas(
         html.Div(
             children=[
                 html.H5('Menu'),
-                horizontal_line(),
+                HorizontalLine,
                 menu_item('menu-upload', 'upload', 'Upload', link=False),
                 upload,
-                horizontal_line(),
+                HorizontalLine,
                 menu_item(id_name='menu-home', icon_name='home', text='Home', link=True),
-                horizontal_line(),
+                HorizontalLine,
                 menu_item(id_name='menu-data-vis', icon_name='chart-area', text='Data Visualization', link=True),
-                horizontal_line(),
+                HorizontalLine,
                 menu_item(id_name='menu-imagery', icon_name='images', text='Imagery', link=True),
             ],
             style={'display': 'flex', 'flex-direction': 'column', 'align-items': 'center'}
