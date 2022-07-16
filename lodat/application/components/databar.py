@@ -1,4 +1,3 @@
-from dash import html
 import dash_bootstrap_components as dbc
 
 from lodat.application.components.SubmitButtonGroup import submit_button_group
