@@ -18,12 +18,3 @@ def set_band_options(_):
     pols = dbm.polarizations
     dbm.close()
     return platforms, bands, pols
-
-
-# @app.callback(
-#     Output('polarization-dropdown', 'options'),
-#     Input('sql-database-dropdown', 'value')
-# )
-# def set_pol_options(_):
-#
-#     return ['HH', 'VV']

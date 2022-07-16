@@ -6,6 +6,8 @@ from lodat.application import config
 from lodat.application.components.HorizontalLine import HorizontalLine
 from lodat.application.components.SubmitButtonGroup import submit_button_group
 
+from .SidebarDropdownItem import sidebar_dropdown_item
+
 sidebar_style = {
     'margin-top': '50px',
     'width': '300px'
@@ -24,45 +26,17 @@ Sidebar = dbc.Offcanvas(
             children=[
                 html.H5('Query Filter'),
                 HorizontalLine,
-                html.Div(
-                    children=[
-                        html.Label('SQL Database'),
-                        dcc.Dropdown(
-                            id='sql-database-dropdown',
-                            options=[
-                                {
-                                    'label': os.path.basename(config.imagery_database_path),
-                                    'value': config.imagery_database_path
-                                }
-                            ]
-                        )
-                    ],
-                    style={'width': '100%'},
+                sidebar_dropdown_item(
+                    label_text='SQL Database',
+                    options=[{'label': os.path.basename(config.imagery_database_path),
+                              'value': config.imagery_database_path}]
                 ),
                 HorizontalLine,
-                html.Div(
-                    children=[
-                        html.Label('Platform'),
-                        dcc.Dropdown(id='platform-dropdown', multi=True)
-                    ],
-                    style={'width': '100%'},
-                ),
+                sidebar_dropdown_item('Platform', multi=True),
                 HorizontalLine,
-                html.Div(
-                    children=[
-                        html.Label('Band'),
-                        dcc.Dropdown(id='band-dropdown', multi=True)
-                    ],
-                    style={'width': '100%'},
-                ),
+                sidebar_dropdown_item('Band', multi=True),
                 HorizontalLine,
-                html.Div(
-                    children=[
-                        html.Label('Polarization'),
-                        dcc.Dropdown(id='polarization-dropdown', multi=True)
-                    ],
-                    style={'width': '100%'},
-                ),
+                sidebar_dropdown_item('Polarization', multi=True),
                 HorizontalLine,
             ],
             style=container_style
