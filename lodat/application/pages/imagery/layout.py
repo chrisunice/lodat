@@ -1,7 +1,7 @@
 from dash import html
 import dash_bootstrap_components as dbc
 
-from .SideBar import SideBar
+from .SideBar import sidebar
 
 page_style = {
     'display': 'flex',
@@ -21,7 +21,7 @@ image_style = {
 layout = html.Div(
     id='imagery-page',
     children=[
-        SideBar,
+        sidebar(),
         dbc.Carousel(
             id='imagery-carousel',
             items=[
