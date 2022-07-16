@@ -17,7 +17,7 @@ container_style = {
     'align-items': 'center'
 }
 
-SideBar = dbc.Offcanvas(
+Sidebar = dbc.Offcanvas(
     id='imagery-sidebar',
     children=[
         html.Div(
