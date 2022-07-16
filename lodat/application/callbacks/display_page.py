@@ -14,7 +14,7 @@ def display_page(pathname):
     elif pathname == '/data-visualization':
         return pages.data_vis_page
     elif pathname == '/imagery':
-        return pages.imagery_page
+        return pages.imagery.layout
     else:
         # todo add an alert here
         return pages.home_page

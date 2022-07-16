@@ -16,7 +16,7 @@ image_style = {
     'box-shadow': '0px 0px 10px #fff'
 }
 
-imagery_page = html.Div(
+layout = html.Div(
     id='imagery-page',
     children=[
         dbc.Carousel(
