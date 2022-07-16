@@ -4,6 +4,7 @@ import dash_bootstrap_components as dbc
 
 from lodat.application import config
 from lodat.application.components.HorizontalLine import HorizontalLine
+from lodat.application.components.SubmitButtonGroup import submit_button_group
 
 sidebar_style = {
     'margin-top': '50px',
@@ -62,10 +63,11 @@ SideBar = dbc.Offcanvas(
                     ],
                     style={'width': '100%'},
                 ),
-                HorizontalLine
+                HorizontalLine,
             ],
             style=container_style
-        )
+        ),
+        submit_button_group('imagery-sidebar')
     ],
     scrollable=False,
     is_open=False,
