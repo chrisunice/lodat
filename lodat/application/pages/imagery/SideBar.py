@@ -41,6 +41,14 @@ SideBar = dbc.Offcanvas(
                 HorizontalLine,
                 html.Div(
                     children=[
+                        html.Label('Platform'),
+                        dcc.Dropdown(id='platform-dropdown', multi=True)
+                    ],
+                    style={'width': '100%'},
+                ),
+                HorizontalLine,
+                html.Div(
+                    children=[
                         html.Label('Band'),
                         dcc.Dropdown(id='band-dropdown', multi=True)
                     ],

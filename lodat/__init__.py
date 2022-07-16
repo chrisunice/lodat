@@ -12,3 +12,4 @@ from .domain.analysis import Algo
 from .domain import stats
 from .domain import utils
 from .domain import plot
+from .database.manager import ImageryDatabaseManager
