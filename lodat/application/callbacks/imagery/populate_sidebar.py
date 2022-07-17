@@ -11,7 +11,7 @@ from lodat import ImageryDatabaseManager
     Input('sql-database-dropdown', 'value'),
     prevent_initial_call=True
 )
-def set_band_options(_):
+def populate_sidebar(_):
     dbm = ImageryDatabaseManager()
     platforms = dbm.platforms
     bands = dbm.bands

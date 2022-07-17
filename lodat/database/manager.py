@@ -25,6 +25,14 @@ class ImageryDatabaseManager:
     def _get_polarizations(self):
         return self.cursor.execute("SELECT DISTINCT Polarization from data ORDER BY Polarization").fetchall()
 
+    def query(self, platforms: list, bands: list, polarizations: list,
+              look_min: int, look_max: int, depr_min: float, depr_max: float):
+
+        sql_statement = "SELECT FROM data WHERE"
+        sql_statement += [f"Platform == {platform} AND" for platform in platforms]
+
+        return self.cursor.execute(sql_statement)
+
     def close(self):
         self.cursor.close()
         self.dbm.close()
