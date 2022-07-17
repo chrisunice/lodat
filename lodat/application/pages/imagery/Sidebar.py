@@ -1,11 +1,12 @@
 import os
-from dash import dcc, html
+from dash import html
 import dash_bootstrap_components as dbc
 
 from lodat.application import config
 from lodat.application.components.HorizontalLine import HorizontalLine
 from lodat.application.components.SubmitButtonGroup import submit_button_group
 
+from .SidebarInputItem import sidebar_input_item
 from .SidebarDropdownItem import sidebar_dropdown_item
 
 sidebar_style = {
@@ -38,6 +39,9 @@ Sidebar = dbc.Offcanvas(
                 HorizontalLine,
                 sidebar_dropdown_item('Polarization', multi=True),
                 HorizontalLine,
+                sidebar_input_item('Look'),
+                HorizontalLine,
+                sidebar_input_item('Depression')
             ],
             style=container_style
         ),
