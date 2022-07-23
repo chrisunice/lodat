@@ -10,6 +10,6 @@ def square_image(image: np.ndarray, dst_size: tuple[int, int]):
     if is_square:
         image = cv2.resize(image, dst_size)
     else:
-        image = tf.image.resize_with_pad(image, *dst_size)
+        image = tf.image.resize_with_crop_or_pad(image, *dst_size)
 
     return image
