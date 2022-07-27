@@ -1,4 +1,5 @@
 import sqlite3
+import pandas as pd
 from lodat.application import config
 
 
@@ -7,8 +8,8 @@ class ImageryDatabaseManager:
         # Establish connection
         if path_to_database is None:
             path_to_database = config.imagery_database_path
-        self.dbm = sqlite3.connect(path_to_database)
-        self.cursor = self.dbm.cursor()
+        self.conn = sqlite3.connect(path_to_database)
+        self.cursor = self.conn.cursor()
         self.cursor.row_factory = lambda _, row: row[0]
 
         # Metadata
@@ -28,15 +29,17 @@ class ImageryDatabaseManager:
     def query(self, platforms: list, bands: list, polarizations: list,
               look_min: int, look_max: int, depr_min: float, depr_max: float):
 
-        sql_statement = "SELECT FROM data WHERE"
-        sql_statement += [f"Platform == {platform} AND" for platform in platforms]
+        # Note hard coded the first element just to get it working
+        sql_statement = "SELECT * FROM data WHERE " \
+                        f"Platform == '{platforms[0]}' AND " \
+                        f"Band == '{bands[0]}' AND " \
+                        f"Polarization == '{polarizations[0]}' AND " \
+                        f"Look >= {look_min} AND Look <= {look_max} AND " \
+                        f"Depression >= {depr_min} AND Depression <= {depr_max}"
 
-        return self.cursor.execute(sql_statement)
+        return pd.read_sql(sql_statement, self.conn)
 
     def close(self):
         self.cursor.close()
-        self.dbm.close()
+        self.conn.close()
         return True
-
-    def __del__(self):
-        self.close()
