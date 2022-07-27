@@ -1,4 +1,4 @@
-from dash import html
+from dash import html, dcc
 import dash_bootstrap_components as dbc
 
 from .Sidebar import Sidebar
@@ -21,6 +21,7 @@ image_style = {
 layout = html.Div(
     id='imagery-page',
     children=[
+        dcc.Store(id='imagery-store', storage_type='memory'),
         Sidebar,
         dbc.Carousel(
             id='imagery-carousel',
@@ -28,12 +29,12 @@ layout = html.Div(
                 {
                     'key': '1',
                     'src': '../static/black_image.jpg',
-                    'caption': 'Select a database to begin'
                 }
             ],
             ride=False,
             style=image_style
-        )
+        ),
+        html.H6(id='carousel-caption', children=['Click the database icon to begin'], style={'margin': '10px'})
     ],
     style=page_style
 )

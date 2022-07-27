@@ -1,10 +1,11 @@
 import os
 import flask
+import pandas as pd
 from dash.dependencies import Input, Output, State
 
+import lodat as lo
 from lodat.application.app import app
 from lodat.application import config
-from lodat import ImageryDatabaseManager
 
 import sqlite3
 
@@ -27,6 +28,7 @@ def serve_images(image_path):
 # On the callback firing the images that are now in the /static folder can be displayed
 @app.callback(
     Output('imagery-carousel', 'items'),
+    Output('imagery-store', 'data'),
     Input('imagery-sidebar-submit-button', 'n_clicks'),
     State('platform-dropdown', 'value'),
     State('band-dropdown', 'value'),
@@ -40,10 +42,11 @@ def serve_images(image_path):
 def display_images(submit_click, plats, bands, pols, look_center, look_span, depr_center, depr_span):
     if submit_click:
 
-        dbm = ImageryDatabaseManager()
-        l0, l1 = look_center-look_span, look_center+look_span
-        d0, d1 = depr_center-depr_span, depr_center+depr_span
-        dbm.query(plats, bands, pols, l0, l1, d0, d1)
+        dbm = lo.ImageryDatabaseManager()
+        # l0, l1 = look_center-look_span, look_center+look_span
+        # d0, d1 = depr_center-depr_span, depr_center+depr_span
+        # results = dbm.query(plats, bands, pols, l0, l1, d0, d1)
+        results = pd.read_sql("SELECT * FROM data", dbm.conn)
 
         items = []
         for idx, path in enumerate(list_of_images):
@@ -51,7 +54,6 @@ def display_images(submit_click, plats, bands, pols, look_center, look_span, dep
                 dict(
                     key=str(idx+1),
                     src=f'{static_image_route}{path}',
-                    caption=f'{os.path.splitext(path)[0]}'
                 )
             )
-        return items
+        return items, results.to_dict('records')
