@@ -36,7 +36,7 @@ class DataObject:
                 data[freq][pol] = self.raw_data[vector_mask]
         return data
 
-    def get_bin_data(self, frequency: float, polarization: str, depression: float, bin_size=(1, 5)):
+    def get_bin_data(self, frequency: float, polarization: str, depression: float, bin_size=(1, 5)) -> pd.DataFrame:
 
         freq = f"{float(frequency):.1f}"
         pol = polarization.upper()
