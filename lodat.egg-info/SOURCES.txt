@@ -1,0 +1,8 @@
+README.md
+setup.py
+lodat/__init__.py
+lodat.egg-info/PKG-INFO
+lodat.egg-info/SOURCES.txt
+lodat.egg-info/dependency_links.txt
+lodat.egg-info/requires.txt
+lodat.egg-info/top_level.txt
