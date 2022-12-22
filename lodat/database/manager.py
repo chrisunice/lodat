@@ -1,6 +1,6 @@
 import sqlite3
 import pandas as pd
-from lodat.application import config
+from lodat import config
 
 
 class ImageryDatabaseManager:

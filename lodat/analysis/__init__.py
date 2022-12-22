@@ -2,9 +2,10 @@ import numpy as np
 import pandas as pd
 
 import lodat as lo
+from lodat import config
 
 
-class Algo(lo.Configuration):
+class Algo:
     def __init__(self, data_object_1: lo.DataObject, data_object_2: lo.DataObject):
         super(Algo, self).__init__()
         self.do1 = data_object_1
@@ -13,11 +14,11 @@ class Algo(lo.Configuration):
     def analyze(self, frequency: float, polarization: str, bootstrap: bool = False):
         # Information from the config.ini
         look_centers = np.arange(
-            start=int(self.config['LOOK']['min']),
-            stop=int(self.config['LOOK']['max']),
-            step=int(self.config['LOOK']['step'])
+            start=int(config['LOOK']['min']),
+            stop=int(config['LOOK']['max']),
+            step=int(config['LOOK']['step'])
         )
-        depr_centers = np.array(list(map(float, self.config['DEPRESSION']['center'].split(','))))
+        depr_centers = np.array(list(map(float, config['DEPRESSION']['center'].split(','))))
 
         # Step through each look
         df = pd.DataFrame()
@@ -34,17 +35,17 @@ class Algo(lo.Configuration):
                 base_data = lo.utils.get_bin(vg2, look, depr)
 
                 # Remove outliers
-                test_fences = lo.stats.fences(test_data.RCS.values, float(self.config['ALGORITHM']['coverage_factor']))
+                test_fences = lo.stats.fences(test_data.RCS.values, float(config['ALGORITHM']['coverage_factor']))
                 test_mask = np.logical_or(test_data.RCS < test_fences[0], test_data.RCS > test_fences[1])
                 test_data = test_data[~test_mask]
 
-                base_fences = lo.stats.fences(base_data.RCS.values, float(self.config['ALGORITHM']['coverage_factor']))
+                base_fences = lo.stats.fences(base_data.RCS.values, float(config['ALGORITHM']['coverage_factor']))
                 base_mask = np.logical_or(base_data.RCS < base_fences[0], base_data.RCS > base_fences[1])
                 base_data = base_data[~base_mask]
 
                 # Bootstrap data
                 if bootstrap:
-                    num_iters = int(self.config['ALGORITHM']['bootstrap_iterations'])
+                    num_iters = int(config['ALGORITHM']['bootstrap_iterations'])
                     test_rcs = np.random.choice(test_data.RCS, (len(test_data.RCS), num_iters), replace=True)
                     base_rcs = np.random.choice(base_data.RCS, (len(base_data.RCS), num_iters), replace=True)
                 else:
@@ -56,8 +57,8 @@ class Algo(lo.Configuration):
                 base_gmn = np.mean(base_rcs)
 
                 # Uncertainty
-                test_u = lo.stats.uncertainty(test_rcs, float(self.config['ALGORITHM']['significance_level']))
-                base_u = lo.stats.uncertainty(base_rcs, float(self.config['ALGORITHM']['significance_level']))
+                test_u = lo.stats.uncertainty(test_rcs, float(config['ALGORITHM']['significance_level']))
+                base_u = lo.stats.uncertainty(base_rcs, float(config['ALGORITHM']['significance_level']))
 
                 # Intervals
                 test_interval = (test_gmn - test_u, test_gmn + test_u)

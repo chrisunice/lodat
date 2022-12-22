@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 
-from lodat.domain.utils import get_bin
+from lodat.utils import get_bin
 
 
 class DataObject:

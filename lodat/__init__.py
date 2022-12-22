@@ -1,15 +1,12 @@
 import os
 from configparser import ConfigParser
 
+config = ConfigParser()
+config.read(f"{os.path.dirname(__file__)}\\config.ini")
 
-class Configuration:
-    def __init__(self):
-        self.config = ConfigParser()
-        self.config.read(f"{os.path.dirname(__file__)}\\config.ini")
-
-from .domain.data import DataObject
-from .domain.analysis import Algo
-from .domain import stats
-from .domain import utils
-from .domain import plot
-from .database.manager import ImageryDatabaseManager
+from lodat.data import DataObject
+from lodat.analysis import Algo
+from lodat import stats
+from lodat import utils
+from lodat import plots
+from lodat.database.manager import ImageryDatabaseManager
