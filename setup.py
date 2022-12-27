@@ -1,4 +1,4 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 from pip._internal.req import parse_requirements
 
 # Get required packages for the project
@@ -9,7 +9,7 @@ setup(
     version='1.0.0',
     author='Chris Unice',
     author_email='cunice@denmartech.com',
-    packages=['lodat'],
+    packages=find_packages(),
     # scripts=['bin/script1','bin/script2'],
     url='http://pypi.python.org/pypi/lodat/',
     # license='LICENSE.txt',
