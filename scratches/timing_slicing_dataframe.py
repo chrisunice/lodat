@@ -61,41 +61,58 @@ if __name__ == '__main__':
 
     path_to_data = r"C:\LODAT\test_assets\large_data.csv"
     my_dot = lo.DataObject(path_to_data)
+    print('\nTime to build DataObject')
+    print(timeit.timeit(lambda: lo.DataObject(path_to_data), number=1))
 
-    # Pre-allocating object to store data
-    data = {f: {p: None for p in my_dot.polarizations} for f in my_dot.frequencies}
+    # # Pre-allocating object to store data
+    # data = {f: {p: None for p in my_dot.polarizations} for f in my_dot.frequencies}
+    #
+    # # TIMING
+    # iterations = 1
+    #
+    # # Benchmark (nested for loops)
+    # t_bench = timeit.timeit(lambda: benchmark(my_dot, data), number=iterations)
+    # print(f'\nBenchmark: {t_bench/iterations:.3f} seconds')
+    #
+    # # Better filter (nested for loops)
+    # t_filter = timeit.timeit(lambda: improved_filtering(my_dot, data), number=iterations)
+    # print(f'\nBetter filtering: {t_filter / iterations:.3f} seconds')
+    #
+    # # Using map
+    # t_map = timeit.timeit(lambda: using_map(my_dot, data), number=iterations)
+    # print(f'\nUsing map: {t_map/iterations:.3f} seconds')
+    #
+    # # Using parallel starmap
+    # t0 = time.time()
+    # vectors = [(f, p) for p in my_dot.polarizations for f in my_dot.frequencies]
+    # chunk_size = len(vectors)//mp.cpu_count()
+    # with mp.Manager() as mgr:
+    #     namespace = mgr.Namespace()
+    #     namespace.df = my_dot.raw_data
+    #     d = mgr.dict()
+    #
+    #     with mp.Pool() as pool:
+    #         pool.starmap(task, zip(vectors, repeat(namespace), repeat(d)), chunksize=chunk_size)
+    #
+    #     bin_data = {}
+    #     for k, v in d.items():
+    #         f, p = k.split('-')
+    #         bin_data[f] = {}
+    #         bin_data[f][p] = v
+    # t1 = time.time()
+    # print(f'\nUsing parallel starmap: {t1-t0:.3f} seconds')
 
-    # TIMING
-    iterations = 1
+    # Using dask
+    from lodat.data.dask_data_object import DaskDataObject
+    ddot = DaskDataObject(path_to_data)
 
-    # Benchmark (nested for loops)
-    t_bench = timeit.timeit(lambda: benchmark(my_dot, data), number=iterations)
-    print(f'\nBenchmark: {t_bench/iterations:.3f} seconds')
+    print(timeit.timeit(lambda: DaskDataObject(path_to_data), number=1))
 
-    # Better filter (nested for loops)
-    t_filter = timeit.timeit(lambda: improved_filtering(my_dot, data), number=iterations)
-    print(f'\nBetter filtering: {t_filter / iterations:.3f} seconds')
+    print(timeit.timeit(lambda: ddot._raw_data.compute(), number=1))
+    print(timeit.timeit(lambda: ddot.raw_data, number=1))
+    print(timeit.timeit(lambda: ddot.raw_data, number=1))
 
-    # Using map
-    t_map = timeit.timeit(lambda: using_map(my_dot, data), number=iterations)
-    print(f'\nUsing map: {t_map/iterations:.3f} seconds')
+    print(timeit.timeit(lambda: ddot.data, number=1))
+    print(timeit.timeit(lambda: ddot.data, number=1))
 
-    # Using parallel starmap
-    t0 = time.time()
-    vectors = [(f, p) for p in my_dot.polarizations for f in my_dot.frequencies]
-    chunk_size = len(vectors)//mp.cpu_count()
-    with mp.Manager() as mgr:
-        namespace = mgr.Namespace()
-        namespace.df = my_dot.raw_data
-        d = mgr.dict()
-
-        with mp.Pool() as pool:
-            pool.starmap(task, zip(vectors, repeat(namespace), repeat(d)), chunksize=chunk_size)
-
-        bin_data = {}
-        for k, v in d.items():
-            f, p = k.split('-')
-            bin_data[f] = {}
-            bin_data[f][p] = v
-    t1 = time.time()
-    print(f'\nUsing parallel starmap: {t1-t0:.3f} seconds')
+    print('Done')
