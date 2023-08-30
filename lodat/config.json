@@ -1,0 +1,29 @@
+{
+  "data": {
+    "look": {
+      "min": 0,
+      "max": 360,
+      "width": 1,
+      "step": 1
+    },
+    "depression":{
+      "centers": [-7.5, 2.5],
+      "width": 5
+    }
+  },
+  "database":{
+    "rcs": {
+      "type": "MongoDB",
+      "host": "127.0.0.1",
+      "port": 27017,
+      "users": {
+        "cunice": 931240
+      }
+    }
+  },
+  "algorithm":{
+    "significance_level": 0.05,
+    "coverage_factor": 3,
+    "bootstrap_iterations": 1000
+  }
+}
