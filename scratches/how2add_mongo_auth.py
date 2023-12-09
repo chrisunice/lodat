@@ -6,8 +6,8 @@
     db.createUser(
       {
         user: "cunice",
-        pwd: "931240",
-        roles: [ { role: "userAdminAnyDatabase", db: "admin" } ]
+        pwd: passwordPrompt(),
+        roles: [ { role: "userAdminAnyDatabase", db: "admin" }, "readWriteAnyDatabase" ]
       }
     )
 4. Should see an {ok:1} response
