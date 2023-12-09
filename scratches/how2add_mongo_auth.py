@@ -7,7 +7,7 @@
       {
         user: "cunice",
         pwd: passwordPrompt(),
-        roles: [ { role: "userAdminAnyDatabase", db: "admin" }, "readWriteAnyDatabase" ]
+        roles: [ { role: "userAdminAnyDatabase", db: "admin" }, "readWriteAnyDatabase", "dbAdminAnyDatabase" ]
       }
     )
 4. Should see an {ok:1} response
@@ -22,6 +22,21 @@
     right click MongoDB
     restart
 9. Run the below python code to confirm
+
+To update roles:
+Example adding the ability to drop databases
+
+1. mongo -u cunice --authenticationDatabase admin -p
+    access database using authentication and prompt for password
+
+2. use admin
+    switch to admin database
+
+3. db.grantRolesToUser("cunice", [{ role: "dbAdminAnyDatabase", db: "admin" }])
+    add a new role to the user
+
+4. db.getUser("cunice")
+    show that the new role was added
 """
 import pymongo
 
