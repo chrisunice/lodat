@@ -1,20 +1,22 @@
+import os
+import glob
 import pandas as pd
 
 
 if __name__ == '__main__':
 
     # Read the CSV data
-    path_to_data = r"C:\LODAT\test_assets\Gdata.xlsx"
-    xlsx = pd.ExcelFile(path_to_data, engine='openpyxl')
+    csv_directory = r"C:\LODAT\test_assets\Gdata"
 
     # Iterate through each sheet
     data = pd.DataFrame()
-    for sheet in xlsx.sheet_names:
+    for csv_path in glob.glob(f"{csv_directory}\\*.csv"):
         # Get vector info
-        freq, pol = sheet.split()
+        fname = os.path.basename(csv_path)
+        freq, pol = os.path.splitext(os.path.basename(fname))[0].split()
 
         # Read the data
-        raw = pd.read_excel(xlsx, sheet_name=sheet, index_col=0, header=0)
+        raw = pd.read_csv(csv_path, index_col=0, header=0)
 
         # Add a Look column based on the index
         raw = raw.reset_index(names='Depression')
